@@ -10,7 +10,7 @@ This code is written in pure JavaScript, HTML, and CSS on our web pages.
 
 The tasks are done in the following manner:
 
-## Level 1. Automatic Table and Date Search:
+### Level 1. Automatic Table and Date Search:
 
 *Create a basic HTML web page.
 
@@ -30,7 +30,7 @@ Using multiple input tags and/or select dropdowns, write JavaScript code so the 
 * country
 * shape
 
-## Level 3.Paginated Table:
+### Level 3.Paginated Table:
 
 * Complete all of Level 2 criteria.
 
