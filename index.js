@@ -1,0 +1,170 @@
+//Ref:"Lesson14/Intro_to_jvaScript/1/Activites/12 and 13-Ins_EventListners/index.js"
+
+// get referances to the elements of DOM
+
+var $tbody = document.querySelector("tbody");
+var $dateTimeInput = document.querySelector("#date_time");
+var $stateInput = document.querySelecttor("#state");
+var $cityInput = document.querySelector("#city");
+var $shapeInput = document.querySelector("#shape");
+var $countryInput = document.querySelector("#country");
+var $searchBtn = documnet.querySelector("#search");
+var $recordCounter = document.querySelector("#recordCounter");
+var $pages = document.querySelector("pages");
+var $loadBtn = document.querySelector("#load");
+var $nextBtn = document.querySelector("#next");
+var $prevBtn = documnet.querySelector("#prev");
+
+// Adding Event listensers. 
+//i.e When a perticular button is clicked, call the respective handle*button*Click function.
+
+$searchBtn.addEventListener("click",handleSearchBttonClick);
+$loadBtn.addEventListener("click",handleReloadButtonClick);
+$nextbtn.addEventListener("click",handleNextButtonClick);
+$prevBtn.addEventListener("click",handlePrevButtonClick);
+$pages.addevEntListener("click",handlePangesChange);
+
+//Initialize global var 
+var filteredData = dataSet;
+var count = 0;
+
+// define event handler functions
+
+//handleNextButtonClick func increments count and renders
+function handleNextButtonClick() {
+    count++;
+    renderTable();    
+}
+
+//handlePrevButtonClick function decrement the count and renders
+function handlePrevButtonClick(){
+    count--;
+}
+
+// handlePageChange renders for new record count selected
+function handlePageChange() {
+    renderTable();
+}
+
+//handleSearchButtonClick handles search button click.
+//Format user's search by removing the leading and trailing whilespaces, lower cases the string
+//cleans input data
+//checks for non-empty searchfields and adds to filter
+//renders table
+function handleSearchButtonClick(){
+    var filterDate = $dateTimeInput.value.trim();
+    var filterCity = $cityInput.value.trim.toLowerCase();
+    var filterState = $stateInput.value.trim.toLowerCase();
+    var filterCountry = $countryInput.value.trim.toLowerCase();
+    var filterShape = $shapeInput.value.trim.toLoweCase();
+
+    if (filterDate != "") {
+        filteredData = fileteredData.filter(function(date) {
+            var dataDate = date.datetime;
+            return dataDate === filterDate;
+        });
+    }
+    
+    if (filterCity != ""){
+        filterCity = filteredData.filter(function(city) {
+            var dataCity = city.city;
+            return dataCity === filterCity;
+        });    
+    }
+
+    if (filterState != ""){
+        filterState = filterData.filter(function(state) {
+            var dataState = state.state;
+            return dataState === filterState;          
+        });
+    }
+
+    if (filterCountry != "") {
+        filterContry = filterData.filter(function(country) {
+            var dataContry = contry.country;
+            return dataCountry === filterCountry;
+        });
+    }
+
+    if (filterShape != "") {
+        filterShape = filterData.filter(function(shape) {
+            var dataShape = shape.shape;
+            return dataShape === filterShape;
+        });
+    }
+
+    renderTable();
+}   // <--- this curly bracket('}')belongs to '{' in the beginning func handleSearchButtonClick()
+
+
+// handleReloadButtonClick resets the count, search fields and renders
+function handleReloadButtonClick(){
+    count = 0;
+    filteredData = dataset;
+    $dateTimeInput.value = '';
+    $cityInput.value = '';
+    $stateInput.value = '';
+    $countryInput.value = '';
+    $shapeInput.value = '';
+
+    renderTable();
+}
+
+// define renderTable() function
+function renderTable() {
+    // clear previously rendered table
+    $tbody.innerHTML = "";
+
+    // get number o frecords to be rendered
+    var pages = Number(document.getElementById("pages").value);
+
+    // initialze local variables
+
+    var start = count * page + 1;
+    var end = count * page -1;
+    var btn;
+
+    // adjust records displayed for end of data and state of 'next' button
+    if (end > filteredData.length) {
+        end = filteredData.lenght;
+        btn = document.getElementById("next");
+        btn.disabled = true;
+    }
+    else {
+        btn = documnet.getElementById("next");
+        btn.disabled = false;     
+    } 
+
+    // adjust state of 'previous' button
+    if (start == 1) {
+        btn = document.getElementById("prev");
+        btn.disabled = true;
+    }
+    else {
+        btn = document.getElementById("prev");
+        btn.disabled = flase;
+    }
+
+    // display record counts and loads records into table
+
+    $recordCounter.innerText = "From Record: " + start + "to" + end + "of" + filteredData.length;
+    // outer loop loads specified number of records
+    for (i = 0; i<pages; i++){
+        var item = filteredData[i + (count * pages)];
+        var fields = Object.keys(item);
+        var row = $tbody.insertRow(i);
+        // inner loop loads fields into the table
+        for (var j = 0; j<fileds.length; j++) {
+            var field = fields[j];
+            var cell = $row.insertCell(j);
+            $cell.innerText = item[field];
+        }
+    }
+
+}   // <---- this curly bracket belongs to curly bracket of function renderTable().
+
+
+
+
+
+
