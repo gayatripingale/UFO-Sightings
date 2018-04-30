@@ -1,31 +1,32 @@
 //Ref:"Lesson14/Intro_to_jvaScript/1/Activites/12 and 13-Ins_EventListners/index.js"
 
 // get referances to the elements of DOM
-
-var $tbody = document.querySelector("tbody");
+console.log('logging');
+var $tbody = document.querySelector("");
 var $dateTimeInput = document.querySelector("#date_time");
-var $stateInput = document.querySelecttor("#state");
+var $stateInput = document.querySelector("#state");
 var $cityInput = document.querySelector("#city");
 var $shapeInput = document.querySelector("#shape");
 var $countryInput = document.querySelector("#country");
-var $searchBtn = documnet.querySelector("#search");
+var $searchBtn = document.querySelector("#search");
 var $recordCounter = document.querySelector("#recordCounter");
-var $pages = document.querySelector("pages");
+var $pages = document.querySelector("#pages");
 var $loadBtn = document.querySelector("#load");
 var $nextBtn = document.querySelector("#next");
-var $prevBtn = documnet.querySelector("#prev");
+var $prevBtn = document.querySelector("#prev");
 
-// Adding Event listensers. 
+// Adding Event listensers.
 //i.e When a perticular button is clicked, call the respective handle*button*Click function.
 
-$searchBtn.addEventListener("click",handleSearchBttonClick);
+$searchBtn.addEventListener("click",handleSearchButtonClick);
 $loadBtn.addEventListener("click",handleReloadButtonClick);
-$nextbtn.addEventListener("click",handleNextButtonClick);
+$nextBtn.addEventListener("click",handleNextButtonClick);
 $prevBtn.addEventListener("click",handlePrevButtonClick);
-$pages.addevEntListener("click",handlePangesChange);
+$pages.addEventListener("click",handlePageChange);
 
-//Initialize global var 
+//Initialize global var
 var filteredData = dataSet;
+console.log('data set', filteredData);
 var count = 0;
 
 // define event handler functions
@@ -33,7 +34,7 @@ var count = 0;
 //handleNextButtonClick func increments count and renders
 function handleNextButtonClick() {
     count++;
-    renderTable();    
+    renderTable();
 }
 
 //handlePrevButtonClick function decrement the count and renders
@@ -53,41 +54,41 @@ function handlePageChange() {
 //renders table
 function handleSearchButtonClick(){
     var filterDate = $dateTimeInput.value.trim();
-    var filterCity = $cityInput.value.trim.toLowerCase();
-    var filterState = $stateInput.value.trim.toLowerCase();
-    var filterCountry = $countryInput.value.trim.toLowerCase();
-    var filterShape = $shapeInput.value.trim.toLoweCase();
+    var filterCity = $cityInput.value.trim().toLowerCase();
+    var filterState = $stateInput.value.trim().toLowerCase();
+    var filterCountry = $countryInput.value.trim().toLowerCase();
+    var filterShape = $shapeInput.value.trim().toLowerCase();
 
     if (filterDate != "") {
-        filteredData = fileteredData.filter(function(date) {
+        filteredData = filteredData.filter(function(date) {
             var dataDate = date.datetime;
             return dataDate === filterDate;
         });
     }
-    
+
     if (filterCity != ""){
         filterCity = filteredData.filter(function(city) {
             var dataCity = city.city;
             return dataCity === filterCity;
-        });    
+        });
     }
 
     if (filterState != ""){
-        filterState = filterData.filter(function(state) {
+        filterState = filteredData.filter(function(state) {
             var dataState = state.state;
-            return dataState === filterState;          
+            return dataState === filterState;
         });
     }
 
     if (filterCountry != "") {
-        filterContry = filterData.filter(function(country) {
+        filterContry = filteredData.filter(function(country) {
             var dataContry = contry.country;
             return dataCountry === filterCountry;
         });
     }
 
     if (filterShape != "") {
-        filterShape = filterData.filter(function(shape) {
+        filterShape = filteredData.filter(function(shape) {
             var dataShape = shape.shape;
             return dataShape === filterShape;
         });
@@ -132,8 +133,8 @@ function renderTable() {
     }
     else {
         btn = documnet.getElementById("next");
-        btn.disabled = false;     
-    } 
+        btn.disabled = false;
+    }
 
     // adjust state of 'previous' button
     if (start == 1) {
@@ -162,9 +163,3 @@ function renderTable() {
     }
 
 }   // <---- this curly bracket belongs to curly bracket of function renderTable().
-
-
-
-
-
-
